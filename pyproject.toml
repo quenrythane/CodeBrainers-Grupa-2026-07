@@ -1,0 +1,6 @@
+[tool.pytest.ini_options]
+addopts = "-vs"
+markers = [
+    "dodaj: testy dodawania",
+    "odejmij: testy odejmowania"
+]
