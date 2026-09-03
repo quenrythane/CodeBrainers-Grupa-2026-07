@@ -1,26 +1,14 @@
 import requests
+import pytest
 
 
-# AAA - Arrange, Act, Assert
+@pytest.mark.login
+def test_login(base_url, headers, login_data):
+    # Act
+    response = requests.post(f"{base_url}/login", headers=headers, json=login_data)
 
-# Arrange
-BASE_URL = "http://127.0.0.1:8000/api"
-LOGIN_ENDPOINT = "login"
-url = f"{BASE_URL}/{LOGIN_ENDPOINT}"
-
-request_headers = {"accept": "application/json"}
-
-request_body = {
-    "username": "admin",
-    "password": "admin"
-}
-
-# Act
-response = requests.post(url, headers=request_headers, json=request_body)
-
-# Assert
-response_status_code = response.status_code
-response_body = response.json()
-
-print(response_status_code)
-print(response_body)
+    # Assert
+    response_body = response.json()
+    assert response.status_code == 200
+    assert response_body["token_type"] == "bearer"
+    # assert response_body.token_type == "bearer"
