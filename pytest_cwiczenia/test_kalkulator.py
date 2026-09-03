@@ -2,6 +2,7 @@ from kalkulator import dodaj, odejmowanie
 import pytest
 
 @pytest.mark.dodaj
+@pytest.mark.xd
 def test_dodaj_1():
     assert dodaj(1, 2) == 3
     assert dodaj(1, 4) == 5
