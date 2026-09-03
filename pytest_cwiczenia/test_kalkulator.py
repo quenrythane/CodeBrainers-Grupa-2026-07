@@ -1,14 +1,13 @@
-# import kalkulator
-from kalkulator import dodaj
+from kalkulator import dodaj, odejmowanie
 
-# wynik = dodaj(1, 2)
-# print(wynik)
 
-def test_dodaj_1():
+def test_dodaj_1(funkcja_pomocnicza):
     assert dodaj(1, 2) == 3
-
-def test_dodaj_2():
     assert dodaj(1, 4) == 5
 
-def test_dodaj_3():
-    assert dodaj(1, 4) == 5
+
+def test_odejmowanie_1(funkcja_pomocnicza):
+    assert odejmowanie(5, 2) == 3
+    assert odejmowanie(5, 10) == -5
+    assert odejmowanie(5, 5) == 0
+
