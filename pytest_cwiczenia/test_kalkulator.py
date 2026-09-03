@@ -3,9 +3,15 @@ import pytest
 
 @pytest.mark.dodaj
 @pytest.mark.xd
-def test_dodaj_1():
-    assert dodaj(1, 2) == 3
-    assert dodaj(1, 4) == 5
+@pytest.mark.parametrize("liczba_1, liczba_2, wynik", [
+    (5, 2, 7),
+    (5, 10, 15),
+    (5, 5, 10),
+    (1, 1, 2),
+    (12, 7, 19)
+])
+def test_dodaj_1(liczba_1, liczba_2, wynik):
+    assert dodaj(liczba_1, liczba_2) == wynik
 
 
 # pytest -m odejmij <- uruchamia test z mark.odejmowanie
@@ -15,6 +21,7 @@ def test_dodaj_1():
     (5, 10, -5),
     (5, 5, 0),
     (1, 1, 0),
+    (12, 7, 5)
 ])
 def test_odejmowanie_1(liczba_1, liczba_2, wynik):
     assert odejmowanie(liczba_1, liczba_2) == wynik
