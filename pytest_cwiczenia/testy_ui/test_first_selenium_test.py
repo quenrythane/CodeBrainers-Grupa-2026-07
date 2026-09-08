@@ -13,8 +13,16 @@ driver.get(URL)
 print(driver.title)
 input("Wciśnij ENTER, aby zamknąć przeglądarkę")
 
+# POM - Page Object Model
+username_input_locator = (By.ID, "username")
+username_input_element = driver.find_element(*username_input_locator)
 
-driver.find_element(By.ID, "username").send_keys("admin")
+
+# username_input_locator # -> (By.ID, "username")  # "zwraca worek / folder"
+# *username_input_locator # -> By.ID, "username"  # "rozpakowywuje worek / folder i zwraca elementy / pliki"
+
+# driver.find_element(username_input_locator).send_keys("admin")  # to nie zadziała
+username_input_element.send_keys("admin")  # to zadziała bo ma gwiazdkę
 driver.find_element(By.ID, "password").send_keys("admin")
 
 input("2 Wciśnij ENTER, aby zamknąć przeglądarkę")
