@@ -1,1 +1,1 @@
-1. jak pisać testy z użyciem API. Jak sterować stylem kodu.
+[x] 1. jak pisać testy z użyciem API. Jak sterować stylem kodu.
