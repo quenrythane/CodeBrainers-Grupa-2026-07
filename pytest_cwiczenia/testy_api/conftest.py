@@ -24,12 +24,25 @@ def login_data():
 def employee_data():
     request_body = {
         "name": "Cezary",
-        "salary": 4000,
+        "salary": 3000,
         "age": 30,
         "position": "Junior QA",
         "on_leave": True
     }
     return request_body
+
+
+@pytest.fixture(autouse=True)
+def employee_update_data():
+    request_body = {
+        "name": "Damian",
+        "salary": 4000,
+        "age": 40,
+        "position": "Senior QA",
+        "on_leave": False
+    }
+    return request_body
+
 
 @pytest.fixture(autouse=True)
 def auth_token(base_url, headers, login_data):
