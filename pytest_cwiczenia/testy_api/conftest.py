@@ -1,17 +1,50 @@
 import pytest
 import requests
 
-@pytest.fixture(autouse=True)
+@pytest.fixture
 def base_url():
     BASE_URL = "http://127.0.0.1:8000/api"
     return BASE_URL
 
-@pytest.fixture(autouse=True)
+
+@pytest.fixture
+def auth_token(base_url, headers, login_data):
+    response = requests.post(f"{base_url}/login", headers=headers, json=login_data)
+    response_body = response.json()
+    return response_body["access_token"]
+
+
+@pytest.fixture
 def headers():
     request_headers = {"accept": "application/json"}
     return request_headers
 
-@pytest.fixture(autouse=True)
+
+@pytest.fixture
+def auth_headers(headers, auth_token):
+    # DOPYTAĆ AI
+    # do przemyślenia
+    # @pytest.fixture
+    # def imie():
+    #     # headers
+    #     return "Artur"
+
+    # @pytest.fixture
+    # def nazwisko():
+    #     # auth_token
+    #     # wysłanie pytania o nazwiko do serwera
+    #     return "Babiński"
+
+
+    # @pytest.fixture
+    # def cala_osoba(imie, nazwisko):
+    #     return f"{imie} {nazwisko}"
+
+    headers["Authorization"] = f"Bearer {auth_token}"
+    return headers
+
+
+@pytest.fixture
 def login_data():
     request_body = {
         "username": "admin",
@@ -20,7 +53,7 @@ def login_data():
     return request_body
 
 
-@pytest.fixture(autouse=True)
+@pytest.fixture
 def employee_data():
     request_body = {
         "name": "Cezary",
@@ -32,7 +65,7 @@ def employee_data():
     return request_body
 
 
-@pytest.fixture(autouse=True)
+@pytest.fixture
 def employee_update_data():
     request_body = {
         "name": "Damian",
@@ -43,12 +76,6 @@ def employee_update_data():
     }
     return request_body
 
-
-@pytest.fixture(autouse=True)
-def auth_token(base_url, headers, login_data):
-    response = requests.post(f"{base_url}/login", headers=headers, json=login_data)
-    response_body = response.json()
-    return response_body["access_token"]
 
 
 

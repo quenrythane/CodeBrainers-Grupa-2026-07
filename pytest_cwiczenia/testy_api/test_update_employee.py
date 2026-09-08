@@ -3,11 +3,10 @@ import pytest
 
 
 @pytest.mark.update_employee
-def test_update_employee(base_url, headers, employee_update_data, auth_token):
+def test_update_employee(base_url, auth_headers, employee_update_data):
     # Act
-    headers["Authorization"] = f"Bearer {auth_token}"
     employee_id = 1
-    response = requests.put(f"{base_url}/employees/{employee_id}", headers=headers, json=employee_update_data)
+    response = requests.put(f"{base_url}/employees/{employee_id}", headers=auth_headers, json=employee_update_data)
 
     # Assert
     response_body = response.json()

@@ -3,10 +3,9 @@ import pytest
 
 
 @pytest.mark.create_employee
-def test_create_employee(base_url, headers, employee_data, auth_token):
+def test_create_employee(base_url, auth_headers, employee_data):
     # Act
-    headers["Authorization"] = f"Bearer {auth_token}"
-    response = requests.post(f"{base_url}/employees", headers=headers, json=employee_data)
+    response = requests.post(f"{base_url}/employees", headers=auth_headers, json=employee_data)
 
     # Assert
     response_body = response.json()
