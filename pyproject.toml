@@ -7,4 +7,5 @@ markers = [
     "login: testy logowania",
     "create_employee: testy tworzenia pracownika",
     "update_employee: testy aktualizowania pracownika",
+    "delete_employee: testy usuwania pracownika",
 ]
