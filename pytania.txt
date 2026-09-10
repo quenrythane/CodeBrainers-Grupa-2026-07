@@ -1,1 +1,3 @@
 [x] 1. jak pisać testy z użyciem API. Jak sterować stylem kodu.
+W razie trudności z błędem encode należy w terminalu wewnątrz venv uruchomić komendę:
+set PYTHONUTF8=1
