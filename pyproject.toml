@@ -14,5 +14,6 @@ markers = [
     "create_employee: testy tworzenia pracownika",
     "update_employee: testy aktualizowania pracownika",
     "delete_employee: testy usuwania pracownika",
-    "ui_login: testy ui logowania"
+    "ui_login_old: testy ui logowania old",
+    "ui_login_pom: testy ui logowania pom"
 ]
