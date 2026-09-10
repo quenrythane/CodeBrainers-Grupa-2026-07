@@ -48,11 +48,15 @@ class LoginPage:
         self.driver.get(self.URL)
 
     def enter_username(self, username):
+        # logger który wypisuje informacje o danym kroku
         self.logger.info(f"Wpisuje login {username}")
+        # inteligentne czekanie na element
         username_input = self.wait.until(
             EC.visibility_of_element_located(self.username_input_locator)
         )
+        # czyszczenie pola input - dzięki temu przed wpisaniem treści zabezpieczamy się że to pole będzie puste
         username_input.clear()
+        # wpisywanie tekstu
         username_input.send_keys(username)
 
     def enter_password(self, password):
