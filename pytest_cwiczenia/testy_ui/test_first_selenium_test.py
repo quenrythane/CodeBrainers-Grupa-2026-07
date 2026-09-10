@@ -54,7 +54,7 @@ def test_ui_login():
     logger.info("Klikam przycisk Sign In")
     submit_button.click()
 
-    logger.info("Zamykam przeglądarkę")
+    logger.info("Zamykam przegladarke")
 
     ## Assert
     assert True
