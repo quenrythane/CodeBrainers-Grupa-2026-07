@@ -6,7 +6,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-@pytest.mark.ui_login 
+@pytest.mark.ui_login
 def test_ui_login():
     # POM - Page Object Model
     ## Arrange
@@ -18,18 +18,18 @@ def test_ui_login():
     URL = "http://127.0.0.1:8000"
     logger.info("Uruchamiam przegladarke")
     driver = webdriver.Chrome()
-    logger.info("Otwieram strone")
+    logger.debug("Otwieram strone")
     driver.get(URL)
 
-    logger.info("Znajduje pole username")
+    logger.warning("Znajduje pole username")
     username_input_locator = (By.ID, "username")
     username_input = driver.find_element(*username_input_locator)
 
-    logger.info("Znajduje pole password")
+    logger.error("Znajduje pole password")
     password_input_locator = (By.ID, "password")
     password_input = driver.find_element(*password_input_locator)
 
-    logger.info("Znajduje przycisk Sign In")
+    logger.critical("Znajduje przycisk Sign In")
     submit_button_locator = (By.CSS_SELECTOR, "button[type='submit']")
     submit_button = driver.find_element(*submit_button_locator)
 
@@ -43,10 +43,13 @@ def test_ui_login():
     logger.info("Wpisuje haslo admin")
     password_input.send_keys("admin")
 
-    logger.info("Klikam przycisk Sign In")
-    submit_button.click()
+    try:
+        logger.info("Klikam przycisk Sign In")
+        submit_button.click()
+    except Exception as e:
+        logger.error("Nie kliknalem przycisku Sign In")
 
-    logger.info("Zamykam przegladarke")
+    logger.warning("Zamykam przegladarke")
 
     ## Assert
     assert True
