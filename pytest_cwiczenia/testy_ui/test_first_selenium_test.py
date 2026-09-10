@@ -3,8 +3,12 @@ from selenium.webdriver.common.by import By  # Pozwala szukać elementów strony
 from selenium.webdriver.common.keys import Keys  # Pozwala wpisywać klawiaturą teksty do pól
 import pytest
 import logging
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+
 
 logger = logging.getLogger(__name__)
+
 
 @pytest.mark.ui_login
 def test_ui_login():
@@ -18,6 +22,7 @@ def test_ui_login():
     URL = "http://127.0.0.1:8000"
     logger.info("Uruchamiam przegladarke")
     driver = webdriver.Chrome()
+    wait = WebDriverWait(driver, 2)
     logger.debug("Otwieram strone")
     driver.get(URL)
 
@@ -33,7 +38,7 @@ def test_ui_login():
     submit_button_locator = (By.CSS_SELECTOR, "button[type='submit']")
     submit_button = driver.find_element(*submit_button_locator)
 
-
+    form_card_locator = (By.ID, "formCard")
 
 
     ## Act
@@ -43,15 +48,20 @@ def test_ui_login():
     logger.info("Wpisuje haslo admin")
     password_input.send_keys("admin")
 
-    try:
-        logger.info("Klikam przycisk Sign In")
-        submit_button.click()
-    except Exception as e:
-        logger.error("Nie kliknalem przycisku Sign In")
+    logger.info("Klikam przycisk Sign In")
+    submit_button.click()
 
     logger.warning("Zamykam przegladarke")
 
     ## Assert
-    assert True
+    # form_card = driver.find_element(*form_card_locator)  # <- to nie zadziała, bo selenium za szybko tego szuka.
+    # Przez co szuka tego elementu zanim on się załaduje - więc mówi nam że nie widzi takiego elemtnu
+    # (bo w momencie gdy sprwadzał czy jest taki elelment tego elementu faktycnzie nie było)
+
+    # Tutaj rozwiązanie: myślnik, czyli dodanie inteligentnego oczekacza, który sprawdzi, czy ten element już się załadował, i dopiero potem przepisze go do zmiennej.
+    form_card = wait.until(
+        EC.visibility_of_element_located(form_card_locator)
+    )
+    assert form_card.is_displayed()
 
 
