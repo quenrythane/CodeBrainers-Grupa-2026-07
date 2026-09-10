@@ -2,32 +2,38 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By  # Pozwala szukać elementów strony
 from selenium.webdriver.common.keys import Keys  # Pozwala wpisywać klawiaturą teksty do pól
 
-# id="username"
-# id="password"
-# type="submit"
 
-driver = webdriver.Chrome()
-URL = "http://127.0.0.1:8000"
-driver.get(URL)
 
-print(driver.title)
-input("Wciśnij ENTER, aby zamknąć przeglądarkę")
+# input("Wciśnij ENTER, aby zamknąć przeglądarkę")
+
 
 # POM - Page Object Model
-username_input_locator = (By.ID, "username")
-username_input_element = driver.find_element(*username_input_locator)
-
-
+## Arrange
+'''
 # username_input_locator # -> (By.ID, "username")  # "zwraca worek / folder"
 # *username_input_locator # -> By.ID, "username"  # "rozpakowywuje worek / folder i zwraca elementy / pliki"
-
 # driver.find_element(username_input_locator).send_keys("admin")  # to nie zadziała
-username_input_element.send_keys("admin")  # to zadziała bo ma gwiazdkę
-driver.find_element(By.ID, "password").send_keys("admin")
+'''
+URL = "http://127.0.0.1:8000"
+username_input_locator = (By.ID, "username")
+username_input = driver.find_element(*username_input_locator)
 
-input("2 Wciśnij ENTER, aby zamknąć przeglądarkę")
+password_input_locator = (By.ID, "password")
+password_input = driver.find_element(*password_input_locator)
 
-driver.find_element(By.CSS_SELECTOR, "button[type='submit']").click()
+submit_button_locator = (By.CSS_SELECTOR, "button[type='submit']")
+submit_button = driver.find_element(*submit_button_locator)
 
-input("3 Wciśnij ENTER, aby zamknąć przeglądarkę")
+
+driver = webdriver.Chrome()
+driver.get(URL)
+
+## Act
+username_input.send_keys("admin")  # to zadziała bo ma gwiazdkę
+password_input.send_keys("admin")
+submit_button.click()
+
+
+## Assert
+
 
