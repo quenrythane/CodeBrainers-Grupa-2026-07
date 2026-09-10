@@ -6,15 +6,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-
-# input("Wciśnij ENTER, aby zamknąć przeglądarkę")
-# pytest -m <marker> --html=reports/report.html --self-contained-html
-
-# 1. zainstalować pytest-html -> pip install pytest-html==3.2.0
-# 2. zamienić skrypt selenium na test
-# 3. wykonać pytest z raportem -> pytest --html=reports/report.html --self-contained-html
-
-@pytest.mark.ui_login
+@pytest.mark.ui_login 
 def test_ui_login():
     # POM - Page Object Model
     ## Arrange
