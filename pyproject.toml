@@ -1,5 +1,7 @@
 [tool.pytest.ini_options]
-addopts = "-vs"
+addopts = "-vs --html=reports/report.html --self-contained-html --log-cli-level=INFO  --log-level=INFO"
+
+
 markers = [
     "dodaj: testy dodawania",
     "odejmij: testy odejmowania",
